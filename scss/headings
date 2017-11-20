@@ -1,0 +1,10 @@
+$text-color: #fff;
+
+h1 { /* stylelint-disable-line */
+  margin-left: $gutter;
+
+  font-size: 1.3125em;
+  font-weight: 700;
+
+  color: $text-color;
+}
