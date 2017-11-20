@@ -54,6 +54,6 @@ main { /* stylelint-disable-line */
   flex-wrap: wrap;
 }
 
-@import "scss/headings";
-@import "scss/breaks";
+@import "scss/headings.scss";
+@import "scss/breaks.scss";
 @import "scss/cards.scss";
