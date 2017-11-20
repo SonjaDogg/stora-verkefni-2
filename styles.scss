@@ -49,5 +49,11 @@ main { /* stylelint-disable-line */
   min-height: 100vh;
 }
 
+.showcase {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @import "scss/headings";
 @import "scss/breaks";
+@import "scss/cards.scss";

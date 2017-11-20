@@ -1,0 +1,15 @@
+.movie {
+
+  display: block;
+
+  width: 100%;
+  min-width: 200px;
+  max-width: 500px;
+
+  margin-bottom: $gutter;
+  margin-left: $gutter;
+
+  word-break: break-word;
+
+  background-color: #fff;
+}
