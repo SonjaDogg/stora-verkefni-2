@@ -2,14 +2,19 @@
 
   display: block;
 
-  width: 100%;
-  min-width: 200px;
-  max-width: 500px;
+  width: 50%;
+  // min-width: 200px;
+  max-width: 500px - $gutter*2;
 
   margin-bottom: $gutter;
   margin-left: $gutter;
+  margin-right: $gutter;
+
+  color: $text-color;
 
   word-break: break-word;
 
-  background-color: #fff;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 }

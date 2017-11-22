@@ -13,18 +13,16 @@ var program = (function() {
 
   function init() {
     // searches the whole document for nylegum html tag
-    nylegar_myndir = document.querySelector('.nylegm');
+    nylegar_myndir = document.querySelector('.showcase__nylegm');
 
-    /*
-    uncomment to have js fill in the nylegar myndir
+/*
+    // uncomment to have js fill in the nylegar myndir
 
     empty(nylegar_myndir);
 
     addTrailer('videos/small.png','small info message','small title message');
     addTrailer('videos/small.png','small info message','small title message');
-    addTrailer('videos/small.png','small info message','small title message');
-    */
-
+*/
   }
 
   function addTrailer(img_path, info_text, title_text) {
