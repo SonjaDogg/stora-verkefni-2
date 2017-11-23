@@ -65,10 +65,10 @@ var program = (function() {
   }
 
   function empty(element) {
-  while(element.firstChild) {
-    element.removeChild(element.firstChild);
+    while(element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
   }
-}
 
   return {
     init: init
