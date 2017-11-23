@@ -8,7 +8,7 @@
     "stylelint": "stylelint *.scss scss/*.scss --syntax scss",
     "lint": "npm-run-all --parallel eslint stylelint",
     "babel": "babel script.js --watch --out-file script-compiled.js --source-maps",
-    "browser-sync": "browser-sync start --server --files index.html styles.css script-compiled.js",
+    "browser-sync": "browser-sync start --server --files index.html videos.html styles.css script-compiled.js",
     "sass": "node-sass --source-map-embed --watch styles.scss styles.css",
     "dev": "npm-run-all --parallel sass babel browser-sync"
   },
