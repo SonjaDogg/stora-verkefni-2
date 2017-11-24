@@ -10,23 +10,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var program = function () {
 
-  var nylegar_myndir;
+  var nylegm;
+  var kennslum;
+  var skemmtim;
 
   function init() {
     // searches the whole document for nylegum html tag
-    nylegar_myndir = document.querySelector('.showcase__nylegm');
+    nylegm = document.querySelector('.nylegm');
+    kennslum = document.querySelector('.kennslum');
+    skemmtim = document.querySelector('.skemmtim');
 
-    /*
-        // uncomment to have js fill in the nylegar myndir
-    
-        empty(nylegar_myndir);
-    
-        addTrailer('videos/small.png','small info message','small title message');
-        addTrailer('videos/small.png','small info message','small title message');
-    */
+    fetchData();
+  }
+  function fetchData() {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'videos.json', true);
+
+    request.onload = function () {
+      var data_from_json_videos = JSON.parse(request.response);
+
+      var ny = data_from_json_videos.categories[0];
+      empty(nylegm);
+      displayData(data_from_json_videos, nylegm, ny);
+
+      var kenns = data_from_json_videos.categories[1];
+      empty(kennslum);
+      displayData(data_from_json_videos, kennslum, kenns);
+
+      var skem = data_from_json_videos.categories[2];
+      empty(skemmtim);
+      displayData(data_from_json_videos, skemmtim, skem);
+
+      //displayData(data_from_json_videos)
+    };
+    request.send();
   }
 
-  function addTrailer(img_path, info_text, title_text) {
+  function displayData(data, htmlCategory, category) {
+    console.log(htmlCategory);
+    var videosInCategory = category.videos;
+    var videos = data.videos;
+
+    var header = document.createElement('h1');
+    header.appendChild(document.createTextNode('test!!!'));
+
+    var showcase_div = document.createElement('div');
+    showcase_div.classList.add('showcase');
+
+    for (var i = 0; i < videosInCategory.length; i++) {
+      var videoIndex = videosInCategory[i];
+      var dataForCategory = getVideoAtIndex(videoIndex, videos);
+      var movieDiv = constructMovieDiv(dataForCategory);
+      showcase_div.appendChild(movieDiv);
+    }
+    // adding the card to the parent html
+    htmlCategory.appendChild(header);
+    htmlCategory.appendChild(showcase_div);
+  }
+
+  function getVideoAtIndex(index, videoArray) {
+
+    for (var i = 0; i < videoArray.length; i++) {
+      var videoData = videoArray[i];
+
+      if (videoData.id == index) {
+        return videoData;
+      }
+    }
+  }
+
+  function constructMovieDiv(dataForVideo) {
     // Make a new image html tag
 
     var movie_div = document.createElement('div');
@@ -40,17 +93,16 @@ var program = function () {
 
     var img_tag = document.createElement('img');
     // Adding a new attribute to link the actual image
-    img_tag.setAttribute('src', img_path);
+    img_tag.setAttribute('src', dataForVideo.poster);
     // adding the css class for the movie image
-    img_tag.classList.add('movie');
 
     var movie_title_text = document.createElement("p");
     movie_title_text.classList.add('title');
-    movie_title_text.appendChild(document.createTextNode(title_text));
+    movie_title_text.appendChild(document.createTextNode(dataForVideo.title));
 
     var movie_info_text = document.createElement("p");
     movie_info_text.classList.add('info');
-    movie_info_text.appendChild(document.createTextNode(info_text));
+    movie_info_text.appendChild(document.createTextNode(dataForVideo.created));
 
     movie_img_div.appendChild(img_tag);
     movie_div.appendChild(movie_img_div);
@@ -59,8 +111,7 @@ var program = function () {
     movie_info_div.appendChild(movie_info_text);
     movie_div.appendChild(movie_info_div);
 
-    // adding the card to the parent html
-    nylegar_myndir.appendChild(movie_div);
+    return movie_div;
   }
 
   function empty(element) {
