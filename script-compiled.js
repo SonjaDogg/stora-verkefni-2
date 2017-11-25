@@ -15,20 +15,24 @@ var program = function () {
   var skemmtim;
 
   function init() {
-    // searches the whole document for nylegum html tag
+    // searches the html document for html tags
     nylegm = document.querySelector('.nylegm');
     kennslum = document.querySelector('.kennslum');
     skemmtim = document.querySelector('.skemmtim');
 
+    // fetches data from json files and constructs the html
     fetchData();
   }
   function fetchData() {
     var request = new XMLHttpRequest();
     request.open('GET', 'videos.json', true);
 
+    // runs a fuction to add the data to the html when request has retuned data
     request.onload = function () {
+      // converts the response to a json object to be able to use it
       var data_from_json_videos = JSON.parse(request.response);
 
+      // creates a variable with data from the categories
       var ny = data_from_json_videos.categories[0];
       empty(nylegm);
       displayData(data_from_json_videos, nylegm, ny);
@@ -46,29 +50,36 @@ var program = function () {
     request.send();
   }
 
+  // Takes in data from json file and
   function displayData(data, htmlCategory, category) {
-    console.log(htmlCategory);
     var videosInCategory = category.videos;
     var videos = data.videos;
     console.log("videos " + videos);
 
+    // creates the header and gives it the title
     var header = document.createElement('h1');
     header.appendChild(document.createTextNode(category.title));
 
+    // creates showcase div element
     var showcase_div = document.createElement('div');
     showcase_div.classList.add('showcase');
 
+    // iterates through all videos in category
     for (var i = 0; i < videosInCategory.length; i++) {
       var videoIndex = videosInCategory[i];
+
+      // finds video data for the caregory at this index
       var dataForCategory = getVideoAtIndex(videoIndex, videos);
+      // creates the movie div that goes into showcase div
       var movieDiv = constructMovieDiv(dataForCategory);
+      // adds the movie div to html
       showcase_div.appendChild(movieDiv);
     }
-    // adding the card to the parent html
+    // adding the card to the parent html (nylegm, skemmtim kennslum)
     htmlCategory.appendChild(header);
     htmlCategory.appendChild(showcase_div);
   }
-
+  // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
 
     for (var i = 0; i < videoArray.length; i++) {
@@ -107,6 +118,7 @@ var program = function () {
       if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";else timePassed = "Fyrir " + months + " mánuðum síðan";
     } else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
 
+    // making html structure
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
 
@@ -139,7 +151,7 @@ var program = function () {
 
     return movie_div;
   }
-
+  // clears elements already present in html
   function empty(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
