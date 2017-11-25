@@ -94,44 +94,6 @@ var program = (function() {
   }
 
   function constructMovieDiv(dataForVideo) {
-    // Make a new image html tag
-    var timePassed = dataForVideo.created;
-    console.log("timePassed " + timePassed);
-
-    //Getting today's date in milliseconds
-    var d = new Date();
-    var n = d.getTime();
-    console.log("milli " + n);
-
-    //Computing difference between current date and created date
-    //and changing to years, months, weeks and days
-    var days = Math.floor((n - timePassed) / 1000 / 86400);
-    var weeks = Math.floor(days / 7);
-    var months = Math.floor(days / 52);
-    var years = Math.floor(days / 365.25);
-
-    console.log("years " + years);
-    console.log("months " + months);
-    console.log("weeks " + weeks);
-    console.log("days " + days);
-
-    //Deciding what should be printed out below video
-    if (years >= 1) {
-      if (years === 1) timePassed = "Fyrir " + years + " ári síðan";
-      else timePassed = "Fyrir " + years + " árum síðan";
-    }
-    else if (months >= 1) {
-      if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";
-      else timePassed = "Fyrir " + months + " mánuðum síðan";
-    }
-    else if (weeks >= 1) {
-      if (weeks === 1) timePassed = "Fyrir " + weeks + " viku síðan";
-      else timePassed = "Fyrir " + weeks + " vikum síðan";
-    }
-    else if (days >= 1) {
-      if (days === 1) timePassed = "Fyrir " + days + " degi síðan";
-      else timePassed = "Fyrir " + days + " dögum síðan";
-    }
 
 
     // making html structure
@@ -156,7 +118,7 @@ var program = (function() {
     var movie_info_text = document.createElement("p");
     movie_info_text.classList.add('info');
 
-    movie_info_text.appendChild(document.createTextNode(timePassed));
+    movie_info_text.appendChild(document.createTextNode(showDate(dataForVideo.created)));
 
     movie_img_div.appendChild(img_tag);
     movie_div.appendChild(movie_img_div);
@@ -168,6 +130,53 @@ var program = (function() {
     return movie_div;
 
   }
+
+  function showDate(movieDate){
+    /** calculates the difference of time between the creation of the video and
+        the current time when the script is run
+    **/
+    var diff = (Date.now() - movieDate) / 1000;
+
+      const diff_y = Math.floor(diff / (60*60*24*30*12));
+      const diff_m = Math.floor((diff / (60*60*24*30)) % 12);
+      const diff_w =  Math.floor((diff / (60*60*24*7)) % 30);
+      const diff_d =  Math.floor((diff / (60*60*24)) % 7);
+      const diff_h = Math.floor((diff / (60*60)) % 24);
+
+    // selects the correct sentence to show
+    switch (true) {
+      case (diff_y != 0 && diff_y == 1):
+        return 'Fyrir ' + diff_y + ' ári síðan';
+        break;
+      case (diff_y != 0 && diff_y != 1):
+        return 'Fyrir ' + diff_y + ' árum síðan';
+        break;
+      case (diff_y == 0 && diff_m == 1):
+          return 'Fyrir ' + diff_m + ' mánuði síðan';
+          break;
+      case (diff_y == 0 && diff_m != 1 && diff_m > 1):
+        return 'Fyrir ' + diff_m + ' mánuðum síðan';
+        break;
+      case (diff_y == 0 && diff_m == 0 && diff_w == 1):
+        return 'Fyrir ' + diff_w + ' viku síðan';
+        break;
+      case (diff_y == 0 && diff_m == 0 && diff_w != 1 && diff_w > 1):
+        return 'Fyrir ' + diff_w + ' vikum síðan';
+        break;
+      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 1):
+          return 'Fyrir ' + diff_d + ' degi síðan';
+          break;
+      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d != 1 && diff_d > 1):
+        return 'Fyrir ' + diff_d + ' dögum síðan';
+        break;
+      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 0 && diff_h == 1):
+          return 'Fyrir ' + diff_h + ' klukkustund síðan';
+          break;
+      default:
+        return 'Fyrir ' + diff_h + ' klukkustundum síðan';
+    }
+  }
+
   // clears elements already present in html
   function empty(element) {
     while(element.firstChild) {
