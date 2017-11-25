@@ -4,11 +4,11 @@
 
   width: 50%;
   // min-width: 200px;
-  max-width: 500px - $gutter*2;
+  max-width: 500px - $gutter * 2;
 
+  margin-right: $gutter;
   margin-bottom: $gutter;
   margin-left: $gutter;
-  margin-right: $gutter;
 
   color: $text-color;
 
