@@ -50,9 +50,10 @@ var program = function () {
     console.log(htmlCategory);
     var videosInCategory = category.videos;
     var videos = data.videos;
+    console.log("videos " + videos);
 
     var header = document.createElement('h1');
-    header.appendChild(document.createTextNode('test!!!'));
+    header.appendChild(document.createTextNode(category.title));
 
     var showcase_div = document.createElement('div');
     showcase_div.classList.add('showcase');
