@@ -85,20 +85,24 @@ var program = function () {
     var timePassed = dataForVideo.created;
     console.log("timePassed " + timePassed);
 
+    //Getting today's date in milliseconds
     var d = new Date();
     var n = d.getTime();
     console.log("milli " + n);
 
+    //Computing difference between current date and created date
+    //and changing to years, months, weeks and days
     var days = Math.floor((n - timePassed) / 1000 / 86400);
-    var years = Math.floor(days / 365.25);
-    var months = Math.floor(days / 52);
     var weeks = Math.floor(days / 7);
+    var months = Math.floor(days / 52);
+    var years = Math.floor(days / 365.25);
 
     console.log("years " + years);
     console.log("months " + months);
     console.log("weeks " + weeks);
     console.log("days " + days);
 
+    //Deciding what should be printed out below video 
     if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";else if (months >= 1) {
       if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";else timePassed = "Fyrir " + months + " mánuðum síðan";
     } else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
