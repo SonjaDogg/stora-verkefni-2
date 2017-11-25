@@ -85,17 +85,21 @@ var program = function () {
     var timePassed = dataForVideo.created;
     console.log("timePassed " + timePassed);
 
-    var years = Math.floor(timePassed / 31540000000);
-    var months = Math.floor(timePassed % 31540000000 / 2628000000);
-    var weeks = Math.floor(timePassed % 31540000000 / 604800000);
-    var days = Math.floor(timePassed % 31540000000 / 86400000);
+    var d = new Date();
+    var n = d.getTime();
+    console.log("milli " + n);
+
+    var days = Math.floor((n - timePassed) / 1000 / 86400);
+    var years = Math.floor(days / 365.25);
+    var months = Math.floor(days / 52);
+    var weeks = Math.floor(days / 7);
 
     console.log("years " + years);
     console.log("months " + months);
     console.log("weeks " + weeks);
     console.log("days " + days);
 
-    if (years > 0) timePassed = "Fyrir " + years + " árum síðan";else if (months > 0) timePassed = "Fyrir " + months + " mánuðum síðan";else if (weeks > 0) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days > 0) timePassed = "Fyrir " + days + " dögum síðan";
+    if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";else if (months >= 1) timePassed = "Fyrir " + months + " mánuðum síðan";else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
 
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
