@@ -105,13 +105,22 @@ var program = (function() {
     console.log("days " + days);
 
     //Deciding what should be printed out below video
-    if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";
+    if (years >= 1) {
+      if (years === 1) timePassed = "Fyrir " + years + " ári síðan";
+      else timePassed = "Fyrir " + years + " árum síðan";
+    }
     else if (months >= 1) {
       if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";
       else timePassed = "Fyrir " + months + " mánuðum síðan";
     }
-    else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";
-    else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
+    else if (weeks >= 1) {
+      if (weeks === 1) timePassed = "Fyrir " + weeks + " viku síðan";
+      else timePassed = "Fyrir " + weeks + " vikum síðan";
+    }
+    else if (days >= 1) {
+      if (days === 1) timePassed = "Fyrir " + days + " degi síðan";
+      else timePassed = "Fyrir " + days + " dögum síðan";
+    }
 
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
