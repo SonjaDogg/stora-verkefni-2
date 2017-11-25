@@ -60,7 +60,7 @@ var program = (function() {
 
     for (var i = 0; i < videosInCategory.length; i++) {
       var videoIndex = videosInCategory[i];
-      var dataForCategory = getVideoAtIndex(videoIndex,videos);
+      var dataForCategory = getVideoAtIndex(videoIndex, videos);
       var movieDiv = constructMovieDiv(dataForCategory);
       showcase_div.appendChild(movieDiv);
 
@@ -75,7 +75,7 @@ var program = (function() {
     for (var i = 0; i < videoArray.length; i++) {
       var videoData = videoArray[i]
 
-      if (videoData.id == index){
+      if (videoData.id === index) {
         return videoData;
       }
     }
@@ -83,6 +83,23 @@ var program = (function() {
 
   function constructMovieDiv(dataForVideo) {
     // Make a new image html tag
+    var timePassed = dataForVideo.created;
+    console.log("timePassed " + timePassed);
+
+    var years = Math.floor(timePassed / 31540000000);
+    var months = Math.floor((timePassed % 31540000000) / 2628000000);
+    var weeks = Math.floor((timePassed % 31540000000) / 604800000);
+    var days = Math.floor((timePassed % 31540000000) / 86400000);
+
+    console.log("years " + years);
+    console.log("months " + months);
+    console.log("weeks " + weeks);
+    console.log("days " + days);
+
+    if (years > 0) timePassed = "Fyrir " + years + " árum síðan";
+    else if (months > 0) timePassed = "Fyrir " + months + " mánuðum síðan";
+    else if (weeks > 0) timePassed = "Fyrir " + weeks + " vikum síðan";
+    else if (days > 0) timePassed = "Fyrir " + days + " dögum síðan";
 
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
@@ -104,7 +121,8 @@ var program = (function() {
 
     var movie_info_text = document.createElement("p");
     movie_info_text.classList.add('info');
-    movie_info_text.appendChild(document.createTextNode(dataForVideo.created));
+
+    movie_info_text.appendChild(document.createTextNode(timePassed));
 
     movie_img_div.appendChild(img_tag);
     movie_div.appendChild(movie_img_div);
