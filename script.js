@@ -24,22 +24,22 @@ var program = (function() {
   }
   function fetchData() {
     var request = new XMLHttpRequest();
-    request.open('GET','videos.json',true);
+    request.open('GET', 'videos.json', true);
 
     request.onload = function() {
       var data_from_json_videos = JSON.parse(request.response);
 
       var ny = data_from_json_videos.categories[0];
       empty(nylegm);
-      displayData(data_from_json_videos,nylegm,ny);
+      displayData(data_from_json_videos, nylegm, ny);
 
       var kenns = data_from_json_videos.categories[1];
       empty(kennslum);
-      displayData(data_from_json_videos,kennslum,kenns);
+      displayData(data_from_json_videos, kennslum, kenns);
 
       var skem = data_from_json_videos.categories[2];
       empty(skemmtim);
-      displayData(data_from_json_videos,skemmtim,skem);
+      displayData(data_from_json_videos, skemmtim, skem);
 
 
       //displayData(data_from_json_videos)
@@ -71,7 +71,7 @@ var program = (function() {
         htmlCategory.appendChild(showcase_div);
   }
 
-  function getVideoAtIndex(index, videoArray){
+  function getVideoAtIndex(index, videoArray) {
 
     for (var i = 0; i < videoArray.length; i++) {
       var videoData = videoArray[i]
@@ -104,7 +104,7 @@ var program = (function() {
     console.log("weeks " + weeks);
     console.log("days " + days);
 
-    //Deciding what should be printed out below video 
+    //Deciding what should be printed out below video
     if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";
     else if (months >= 1) {
       if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";
