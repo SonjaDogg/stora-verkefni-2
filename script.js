@@ -100,6 +100,8 @@ var program = (function() {
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
 
+    var clickable_container = document.createElement('a');
+    clickable_container.setAttribute('href', 'videos.html' + '?id=' + dataForVideo.id);
     var movie_img_div = document.createElement('div');
     movie_img_div.classList.add('movie__image');
 
@@ -121,7 +123,8 @@ var program = (function() {
     movie_info_text.appendChild(document.createTextNode(showDate(dataForVideo.created)));
 
     movie_img_div.appendChild(img_tag);
-    movie_div.appendChild(movie_img_div);
+    clickable_container.appendChild(movie_img_div);
+    movie_div.appendChild(clickable_container);
 
     movie_info_div.appendChild(movie_title_text);
     movie_info_div.appendChild(movie_info_text);
