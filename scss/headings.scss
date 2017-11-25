@@ -1,11 +1,17 @@
 $text-color: #fff;
 
 h1 { /* stylelint-disable-line */
+  margin-top: 20px;
   margin-bottom: 30px;
   margin-left: $gutter;
 
-  font-size: 1.3125em;
+  font-size: 2em;
   font-weight: 700;
 
   color: $text-color;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
 }
