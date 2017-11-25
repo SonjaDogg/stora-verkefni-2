@@ -99,7 +99,9 @@ var program = function () {
     console.log("weeks " + weeks);
     console.log("days " + days);
 
-    if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";else if (months >= 1) timePassed = "Fyrir " + months + " mánuðum síðan";else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
+    if (years >= 1) timePassed = "Fyrir " + years + " árum síðan";else if (months >= 1) {
+      if (months === 1) timePassed = "Fyrir " + months + " mánuði síðan";else timePassed = "Fyrir " + months + " mánuðum síðan";
+    } else if (weeks >= 1) timePassed = "Fyrir " + weeks + " vikum síðan";else if (days >= 1) timePassed = "Fyrir " + days + " dögum síðan";
 
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
