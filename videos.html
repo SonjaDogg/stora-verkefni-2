@@ -47,15 +47,18 @@
         video.play();
         play_pause_control[0].removeChild(play_pause_control[0].firstChild);
 
-        var plause_img = document.createElement("img");
-        play_img.setAttribute('src', 'img/pause.svg');
-        play_pause_control[0].appendChild(document.createElement('img'));
+        var pause_img = document.createElement("img");
+        pause_img.setAttribute('src', 'img/pause.svg');
+        play_pause_control[0].appendChild(pause_img);
 
       } else {
         video.pause();
+        play_pause_control[0].removeChild(play_pause_control[0].firstChild);
 
-        //play_pause_control[0].removeChild(play_pause_control[0].firstChild);
-        //play_pause_control[0].appendChild(play_pause_control[0].createTextNode('Play'));
+        var play_img = document.createElement("img");
+        play_img.setAttribute('src', 'img/play.svg');
+        play_pause_control[0].appendChild(play_img);
+
       }
     });
 
