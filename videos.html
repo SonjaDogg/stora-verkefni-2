@@ -35,8 +35,30 @@
       <div class="menuback">
         <a href="index.html">Til baka</a>
       </div>
-  
+
     </main>
-    <script src="script-compiled.js"></script>
+    <script>
+
+    var video = document.querySelector("video");
+    var play_pause_control = document.getElementsByClassName("play");
+
+    play_pause_control[0].addEventListener("click", function () {
+      if (video.paused) {
+        video.play();
+        play_pause_control[0].removeChild(play_pause_control[0].firstChild);
+
+        var plause_img = document.createElement("img");
+        play_img.setAttribute('src', 'img/pause.svg');
+        play_pause_control[0].appendChild(document.createElement('img'));
+
+      } else {
+        video.pause();
+
+        //play_pause_control[0].removeChild(play_pause_control[0].firstChild);
+        //play_pause_control[0].appendChild(play_pause_control[0].createTextNode('Play'));
+      }
+    });
+
+    </script>
   </body>
 </html>
