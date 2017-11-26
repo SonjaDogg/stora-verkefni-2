@@ -1,7 +1,7 @@
 $text-color: #fff;
 
 h1 { /* stylelint-disable-line */
-  margin-top: 20px;
+  margin-top: $gutter;
   margin-bottom: 30px;
   margin-left: $gutter;
 
@@ -11,12 +11,17 @@ h1 { /* stylelint-disable-line */
   color: $text-color;
 }
 
+.spilandim h1 { /* stylelint-disable-line */
+  text-align: center;
+}
+
 .title {
   font-size: 1.5em;
   font-weight: bold;
 }
 
-.back {
-  color: $text-color;
-  align-self: center;
+.backbutton {
+  margin-top: 40px;
+  color: #bebebe;
+  text-align: center;
 }
