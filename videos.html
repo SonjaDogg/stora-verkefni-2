@@ -22,7 +22,7 @@
           <img src="img/play.svg" id="play_pause" alt="">
         </div>
         <div class="mute">
-          <img src="img/mute.svg" alt="">
+          <img src="img/mute.svg" id="mute_unmute" alt="">
         </div>
         <div class="fullscreen">
           <img src="img/fullscreen.svg" alt="">
@@ -44,7 +44,7 @@
     // back control
     var back = document.getElementsByClassName("back");
 
-    back[0].addEventListener('click', function(){
+    back[0].addEventListener('click', function() {
       video.currentTime -= 3;
     });
 
@@ -62,20 +62,22 @@
     });
 
     // mute control
-    var mute = document.getElementsByClassName('mute');
+    var mute = document.getElementsByClassName("mute");
 
     mute[0].addEventListener('click', function(){
       if (video.muted) {
         video.muted = false;
-      } else{
+        document.getElementById('mute_unmute').setAttribute('src', 'img/mute.svg');
+      } else {
         video.muted = true;
+        document.getElementById('mute_unmute').setAttribute('src', 'img/unmute.svg');
       }
     });
 
     //fullscreen control
     var fullscreen = document.getElementsByClassName('fullscreen');
 
-    fullscreen[0].addEventListener('click', function(){
+    fullscreen[0].addEventListener('click', function() {
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.mozRequestFullScreen) {
@@ -88,7 +90,7 @@
     // forward control
     var forward = document.getElementsByClassName("next");
 
-    forward[0].addEventListener('click', function(){
+    forward[0].addEventListener('click', function() {
       video.currentTime += 3;
     });
 
