@@ -57,8 +57,21 @@ main { /* stylelint-disable-line */
   align-items: flex-end;
 }
 
-video { /* stylelint-disable-line */
+video {/* stylelint-disable-line */
   width: 100%;
+}
+
+.menuback {
+  display: flex;
+  width: 100%;
+
+  justify-content: center;
+  padding-top: 20px;
+}
+
+a {/* stylelint-disable-line */
+  color: #fff;
+  text-decoration: none;
 }
 
 @import "scss/headings.scss";
