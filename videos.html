@@ -12,7 +12,12 @@
         <h1>Big Bunny</h1>
       </div>
 
-      <video src="videos/bunny.mp4"></video>
+      <div class="screen">
+        <video src="videos/bunny.mp4"></video>
+        <div id="overlay">
+          <img src="img/play.svg" width="50" alt="">
+        </div>
+      </div>
 
       <div class="controls">
         <div class="back">
@@ -55,9 +60,13 @@
       if (video.paused) {
         video.play();
         document.getElementById('play_pause').setAttribute('src', 'img/pause.svg');
+        video.style.opacity = "1";
+        document.getElementById('overlay').style.opacity = "0";
       } else {
         video.pause();
         document.getElementById('play_pause').setAttribute('src', 'img/play.svg');
+        video.style.opacity = "0.2";
+        document.getElementById('overlay').style.opacity = "1";
       }
     });
 
