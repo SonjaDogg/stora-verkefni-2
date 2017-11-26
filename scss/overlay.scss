@@ -2,6 +2,10 @@
   position: relative;
 }
 
+video {/* stylelint-disable-line */
+  width: 100%;
+}
+
 #overlay {/* stylelint-disable-line */
   position: absolute;
   top: 0;

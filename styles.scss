@@ -50,24 +50,6 @@ main { /* stylelint-disable-line */
   margin: 0 auto;
 }
 
-.showcase {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-video {/* stylelint-disable-line */
-  width: 100%;
-}
-
-.menuback {
-  display: flex;
-  width: 100%;
-
-  justify-content: center;
-  padding-top: 20px;
-}
 
 a {/* stylelint-disable-line */
   color: #fff;
@@ -77,5 +59,7 @@ a {/* stylelint-disable-line */
 @import "scss/headings.scss";
 @import "scss/breaks.scss";
 @import "scss/cards.scss";
+@import "scss/showcase.scss";
 @import "scss/images.scss";
 @import "scss/overlay.scss";
+@import "scss/menuback.scss";
