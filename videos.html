@@ -12,14 +12,14 @@
         <h1>Big Bunny</h1>
       </div>
 
-      <video src="videos/bunny.mp4" controls></video>
+      <video src="videos/bunny.mp4"></video>
 
       <div class="controls">
         <div class="back">
           <img src="img/back.svg" alt="">
         </div>
         <div class="play">
-          <img src="img/play.svg" alt="">
+          <img src="img/play.svg" id="play_pause" alt="">
         </div>
         <div class="mute">
           <img src="img/mute.svg" alt="">
@@ -54,21 +54,10 @@
     play_pause_control[0].addEventListener("click", function () {
       if (video.paused) {
         video.play();
-
-        play_pause_control[0].removeChild(play_pause_control[0].firstChild);
-
-        var pause_img = document.createElement('img');
-        pause_img.setAttribute('src', 'img/pause.svg');
-        play_pause_control[0].appendChild(pause_img);
-
+        document.getElementById('play_pause').setAttribute('src', 'img/pause.svg');
       } else {
         video.pause();
-
-        play_pause_control[0].removeChild(play_pause_control[0].firstChild);
-
-        var play_img = document.createElement("img");
-        play_img.setAttribute('src','img/play.svg');
-        play_pause_control[0].appendChild(play_img);
+        document.getElementById('play_pause').setAttribute('src', 'img/play.svg');
       }
     });
 
