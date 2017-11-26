@@ -45,8 +45,8 @@ img { /* stylelint-disable-line */
 }
 
 main { /* stylelint-disable-line */
-  min-height: 100vh;
   max-width: $max-width;
+  min-height: 100vh;
   margin: 0 auto;
 }
 
@@ -55,6 +55,10 @@ main { /* stylelint-disable-line */
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+video { /* stylelint-disable-line */
+  width: 100%;
 }
 
 @import "scss/headings.scss";
