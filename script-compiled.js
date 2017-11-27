@@ -144,31 +144,31 @@ var program = function () {
 
     // selects the correct sentence to show
     switch (true) {
-      case diff_y != 0 && diff_y == 1:
+      case diff_y !== 0 && diff_y === 1:
         return 'Fyrir ' + diff_y + ' ári síðan';
         break;
-      case diff_y != 0 && diff_y != 1:
+      case diff_y !== 0 && diff_y !== 1:
         return 'Fyrir ' + diff_y + ' árum síðan';
         break;
-      case diff_y == 0 && diff_m == 1:
+      case diff_y === 0 && diff_m === 1:
         return 'Fyrir ' + diff_m + ' mánuði síðan';
         break;
-      case diff_y == 0 && diff_m != 1 && diff_m > 1:
+      case diff_y === 0 && diff_m !== 1 && diff_m > 1:
         return 'Fyrir ' + diff_m + ' mánuðum síðan';
         break;
-      case diff_y == 0 && diff_m == 0 && diff_w == 1:
+      case diff_y === 0 && diff_m === 0 && diff_w === 1:
         return 'Fyrir ' + diff_w + ' viku síðan';
         break;
-      case diff_y == 0 && diff_m == 0 && diff_w != 1 && diff_w > 1:
+      case diff_y === 0 && diff_m === 0 && diff_w !== 1 && diff_w > 1:
         return 'Fyrir ' + diff_w + ' vikum síðan';
         break;
-      case diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 1:
+      case diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d === 1:
         return 'Fyrir ' + diff_d + ' degi síðan';
         break;
-      case diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d != 1 && diff_d > 1:
+      case diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d !== 1 && diff_d > 1:
         return 'Fyrir ' + diff_d + ' dögum síðan';
         break;
-      case diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 0 && diff_h == 1:
+      case diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d === 0 && diff_h === 1:
         return 'Fyrir ' + diff_h + ' klukkustund síðan';
         break;
       default:

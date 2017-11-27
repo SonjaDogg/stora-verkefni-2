@@ -94,7 +94,6 @@ var program = (function() {
 
   function constructMovieDiv(dataForVideo) {
 
-
     // making html structure
     var movie_div = document.createElement('div');
     movie_div.classList.add('movie');
@@ -134,45 +133,45 @@ var program = (function() {
 
   }
 
-  function showDate(movieDate){
+  function showDate(movieDate) {
     /** calculates the difference of time between the creation of the video and
         the current time when the script is run
     **/
     var diff = (Date.now() - movieDate) / 1000;
 
-      const diff_y = Math.floor(diff / (60*60*24*30*12));
-      const diff_m = Math.floor((diff / (60*60*24*30)) % 12);
-      const diff_w =  Math.floor((diff / (60*60*24*7)) % 30);
-      const diff_d =  Math.floor((diff / (60*60*24)) % 7);
-      const diff_h = Math.floor((diff / (60*60)) % 24);
+      const diff_y = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
+      const diff_m = Math.floor((diff / (60 * 60 * 24 * 30)) % 12);
+      const diff_w =  Math.floor((diff / (60 * 60 * 24 * 7)) % 30);
+      const diff_d =  Math.floor((diff / (60 * 60 * 24)) % 7);
+      const diff_h = Math.floor((diff / (60 * 60)) % 24);
 
     // selects the correct sentence to show
     switch (true) {
-      case (diff_y != 0 && diff_y == 1):
+      case (diff_y !== 0 && diff_y === 1):
         return 'Fyrir ' + diff_y + ' ári síðan';
         break;
-      case (diff_y != 0 && diff_y != 1):
+      case (diff_y !== 0 && diff_y !== 1):
         return 'Fyrir ' + diff_y + ' árum síðan';
         break;
-      case (diff_y == 0 && diff_m == 1):
+      case (diff_y === 0 && diff_m === 1):
           return 'Fyrir ' + diff_m + ' mánuði síðan';
           break;
-      case (diff_y == 0 && diff_m != 1 && diff_m > 1):
+      case (diff_y === 0 && diff_m !== 1 && diff_m > 1):
         return 'Fyrir ' + diff_m + ' mánuðum síðan';
         break;
-      case (diff_y == 0 && diff_m == 0 && diff_w == 1):
+      case (diff_y === 0 && diff_m === 0 && diff_w === 1):
         return 'Fyrir ' + diff_w + ' viku síðan';
         break;
-      case (diff_y == 0 && diff_m == 0 && diff_w != 1 && diff_w > 1):
+      case (diff_y === 0 && diff_m === 0 && diff_w !== 1 && diff_w > 1):
         return 'Fyrir ' + diff_w + ' vikum síðan';
         break;
-      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 1):
+      case (diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d === 1):
           return 'Fyrir ' + diff_d + ' degi síðan';
           break;
-      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d != 1 && diff_d > 1):
+      case (diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d !== 1 && diff_d > 1):
         return 'Fyrir ' + diff_d + ' dögum síðan';
         break;
-      case (diff_y == 0 && diff_m == 0 && diff_w == 0 && diff_d == 0 && diff_h == 1):
+      case (diff_y === 0 && diff_m === 0 && diff_w === 0 && diff_d === 0 && diff_h === 1):
           return 'Fyrir ' + diff_h + ' klukkustund síðan';
           break;
       default:
