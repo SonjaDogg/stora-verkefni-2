@@ -109,10 +109,10 @@ var program = function () {
     // Adding a new attribute to link the actual image
     img_tag.setAttribute('src', dataForVideo.poster);
 
-    // var time_overlay = document.createElement('p');
-    // // time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
-    // time_overlay.setAttribute(showTime(dataForVideo.duration));
-    // console.log("timi " + showTime(dataForVideo.duration));
+    // Overlay of the length of the video
+    var t_overlay = document.createElement('div');
+    t_overlay.classList.add('t_overlay');
+    t_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
 
     // adding the css class for the movie image
     var movie_title_text = document.createElement("p");
@@ -125,6 +125,7 @@ var program = function () {
     movie_info_text.appendChild(document.createTextNode(showDate(dataForVideo.created)));
 
     movie_img_div.appendChild(img_tag);
+    movie_img_div.appendChild(t_overlay);
     clickable_container.appendChild(movie_img_div);
     movie_div.appendChild(clickable_container);
 

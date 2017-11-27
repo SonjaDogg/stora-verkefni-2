@@ -56,6 +56,10 @@ a {/* stylelint-disable-line */
   text-decoration: none;
 }
 
+.movie__image {
+  position: relative;
+}
+
 @import "scss/headings.scss";
 @import "scss/breaks.scss";
 @import "scss/cards.scss";
