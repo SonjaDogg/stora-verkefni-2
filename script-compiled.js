@@ -112,7 +112,9 @@ var program = function () {
     // Overlay of the length of the video
     var t_overlay = document.createElement('div');
     t_overlay.classList.add('t_overlay');
-    t_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    var p_length = document.createElement('p');
+    p_length.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    t_overlay.appendChild(p_length);
 
     // adding the css class for the movie image
     var movie_title_text = document.createElement("p");
