@@ -110,7 +110,8 @@ var program = function () {
     img_tag.setAttribute('src', dataForVideo.poster);
 
     var time_overlay = document.createElement('p');
-    time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    // time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    time_overlay.setAttribute(showTime(dataForVideo.duration));
     console.log("timi " + showTime(dataForVideo.duration));
 
     // adding the css class for the movie image
