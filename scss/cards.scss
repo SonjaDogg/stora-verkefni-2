@@ -14,7 +14,8 @@
 
   word-break: break-word;
 
-  @media (max-width: 500px) {
+  @media (max-width: $max-width) {
     width: 100%;
+    max-width: none;
   }
 }
