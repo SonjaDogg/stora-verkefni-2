@@ -190,11 +190,11 @@ var program = (function() {
 
     //Adds a '0' in front of seconds if only 1 digit
     if (seconds.toString().length === 1) {
-      seconds = "0" + seconds;
+      seconds = '0' + seconds;
     }
-    
+
     return minutes + ':' + seconds;
-}
+  }
 
   // clears elements already present in html
   function empty(element) {
