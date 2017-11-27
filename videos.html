@@ -44,68 +44,6 @@
       </div>
 
     </main>
-    <script>
-
-    var video = document.querySelector("video");
-
-    // back control
-    var back = document.getElementsByClassName("back");
-
-    back[0].addEventListener('click', function() {
-      video.currentTime -= 3;
-    });
-
-    // play and pause controls
-    var play_pause_control = document.getElementsByClassName("play");
-
-    play_pause_control[0].addEventListener("click", function () {
-      if (video.paused) {
-        video.play();
-        document.getElementById('play_pause').setAttribute('src', 'img/pause.svg');
-        video.style.opacity = "1";
-        document.getElementById('overlay').style.opacity = "0";
-      } else {
-        video.pause();
-        document.getElementById('play_pause').setAttribute('src', 'img/play.svg');
-        video.style.opacity = "0.2";
-        document.getElementById('overlay').style.opacity = "1";
-      }
-    });
-
-    // mute control
-    var mute = document.getElementsByClassName("mute");
-
-    mute[0].addEventListener('click', function(){
-      if (video.muted) {
-        video.muted = false;
-        document.getElementById('mute_unmute').setAttribute('src', 'img/mute.svg');
-      } else {
-        video.muted = true;
-        document.getElementById('mute_unmute').setAttribute('src', 'img/unmute.svg');
-      }
-    });
-
-    //fullscreen control
-    var fullscreen = document.getElementsByClassName('fullscreen');
-
-    fullscreen[0].addEventListener('click', function() {
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) {
-        video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      }
-    });
-
-    // forward control
-    var forward = document.getElementsByClassName("next");
-
-    forward[0].addEventListener('click', function() {
-      video.currentTime += 3;
-    });
-
-    </script>
     <script src="script-compiled.js"></script>
   </body>
 </html>
