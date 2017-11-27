@@ -182,8 +182,10 @@ var program = function () {
 
   function showTime(movieTime) {
     //Changes seconds to minutes and seconds
-    var minutes = Math.floor(movieTime % 3600 / 60);
-    var seconds = Math.floor(movieTime % 3600 % 60);
+    var minutes = Math.floor(movieTime / 60);
+    var seconds = movieTime - Math.floor(movieTime / 60) * 60;
+    console.log("min " + minutes);
+    console.log("sec " + seconds);
 
     //Adds a '0' in front of seconds if only 1 digit
     if (seconds.toString().length === 1) {
