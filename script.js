@@ -111,6 +111,10 @@ var program = (function() {
     // Adding a new attribute to link the actual image
     img_tag.setAttribute('src', dataForVideo.poster);
 
+    var time_overlay = document.createElement('p');
+    time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    console.log("timi " + showTime(dataForVideo.duration));
+
     // adding the css class for the movie image
     var movie_title_text = document.createElement("p");
     movie_title_text.classList.add('title');
@@ -178,6 +182,19 @@ var program = (function() {
         return 'Fyrir ' + diff_h + ' klukkustundum síðan';
     }
   }
+
+  function showTime(movieTime) {
+    //Changes seconds to minutes and seconds
+    var minutes = Math.floor(movieTime % 3600 / 60);
+    var seconds = Math.floor(movieTime % 3600 % 60);
+
+    //Adds a '0' in front of seconds if only 1 digit
+    if (seconds.toString().length === 1) {
+      seconds = "0" + seconds;
+    }
+    
+    return minutes + ':' + seconds;
+}
 
   // clears elements already present in html
   function empty(element) {
