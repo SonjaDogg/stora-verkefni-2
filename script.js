@@ -1,12 +1,65 @@
 document.addEventListener('DOMContentLoaded', function () {
   // runs when the DOM content has loaded
 
-  // initializes the program object where all the logic happens
-  program.init();
+  var player_html = document.querySelector('.spilandim');
+
+  if (player_html) {
+    player.init();
+  } else {
+    library.init();
+  }
 
 });
 
-var program = (function() {
+var player = (function() {
+
+  var video_container;
+
+  function init() {
+    video_container = document.querySelector('.video_container');
+    empty(video_container);
+    construct_video_player();
+  }
+
+  function empty(element) {
+    while(element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
+  function construct_video_player() {
+
+  var spilandim_html = document.createElement('div');
+  spilandim_html.classList.add('spilandim');
+  video_container.appendChild(spilandim_html);
+
+  var header = document.createElement('h1');
+  header.appendChild(document.createTextNode('Fudge'));
+  spilandim_html.appendChild(header);
+
+  var screen_html = document.createElement('div');
+  screen_html.classList.add('screen');
+  video_container.appendChild(screen_html);
+
+  var overlay_div = document.createElement('div');
+  overlay_div.setAttribute('id', 'overlay');
+  screen_html.appendChild(overlay_div);
+  var img_tag = document.createElement('img');
+  img_tag.setAttribute('src', 'img/play.svg');
+  img_tag.setAttribute('width', '50');
+  overlay_div.appendChild(img_tag);
+
+  var video = document.createElement('video');
+  video.setAttribute('src', 'videos/bunny.mp4');
+  screen_html.appendChild(video);
+  }
+
+  return {
+    init: init
+  }
+})();
+
+var library = (function() {
 
   var nylegm;
   var kennslum;
