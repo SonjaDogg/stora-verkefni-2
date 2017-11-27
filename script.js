@@ -14,11 +14,25 @@ document.addEventListener('DOMContentLoaded', function () {
 var player = (function() {
 
   var video_container;
+  var video_index;
 
   function init() {
+    var url = window.location.search;
+    video_index = url.split('=')[1];
     video_container = document.querySelector('.video_container');
     empty(video_container);
-    construct_video_player();
+    fetchData();
+  }
+  // finds the video in json by index number
+  function getVideoAtIndex(index, videoArray) {
+
+    for (var i = 0; i < videoArray.length; i++) {
+      var videoData = videoArray[i]
+
+      if (videoData.id == index) {
+        return videoData;
+      }
+    }
   }
 
   function empty(element) {
@@ -27,14 +41,14 @@ var player = (function() {
     }
   }
 
-  function construct_video_player() {
+  function construct_video_player(video_data) {
 
   var spilandim_html = document.createElement('div');
   spilandim_html.classList.add('spilandim');
   video_container.appendChild(spilandim_html);
 
   var header = document.createElement('h1');
-  header.appendChild(document.createTextNode('Fudge'));
+  header.appendChild(document.createTextNode(video_data.title));
   spilandim_html.appendChild(header);
 
   var screen_html = document.createElement('div');
@@ -50,8 +64,23 @@ var player = (function() {
   overlay_div.appendChild(img_tag);
 
   var video = document.createElement('video');
-  video.setAttribute('src', 'videos/bunny.mp4');
+  video.setAttribute('src', video_data.video);
   screen_html.appendChild(video);
+  }
+
+  function fetchData() {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'videos.json', true);
+
+    request.onload = function() {
+      // converts the response to a json object to be able to use it
+      var data_from_json_videos = JSON.parse(request.response);
+      var videos = data_from_json_videos.videos;
+      var data = getVideoAtIndex(video_index, videos);
+      console.log(video_index);
+      construct_video_player(data);
+    }
+    request.send();
   }
 
   return {
