@@ -109,10 +109,10 @@ var program = function () {
     // Adding a new attribute to link the actual image
     img_tag.setAttribute('src', dataForVideo.poster);
 
-    var time_overlay = document.createElement('p');
-    // time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
-    time_overlay.setAttribute(showTime(dataForVideo.duration));
-    console.log("timi " + showTime(dataForVideo.duration));
+    // var time_overlay = document.createElement('p');
+    // // time_overlay.appendChild(document.createTextNode(showTime(dataForVideo.duration)));
+    // time_overlay.setAttribute(showTime(dataForVideo.duration));
+    // console.log("timi " + showTime(dataForVideo.duration));
 
     // adding the css class for the movie image
     var movie_title_text = document.createElement("p");
