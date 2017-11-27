@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // runs when the DOM content has loaded
 
   // initializes the program object where all the logic happens
-
   program.init();
 });
 
@@ -106,10 +105,11 @@ var program = function () {
     movie_info_div.classList.add('movie__info');
 
     var img_tag = document.createElement('img');
+
     // Adding a new attribute to link the actual image
     img_tag.setAttribute('src', dataForVideo.poster);
-    // adding the css class for the movie image
 
+    // adding the css class for the movie image
     var movie_title_text = document.createElement("p");
     movie_title_text.classList.add('title');
     movie_title_text.appendChild(document.createTextNode(dataForVideo.title));
