@@ -158,7 +158,7 @@ let player = (function () {
   }
 
   return {
-    init: init
+    init: init,
   };
 })();
 
