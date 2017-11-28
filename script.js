@@ -24,7 +24,7 @@ const player = (function () {
     for (i = 0; i < videoArray.length; i += 1) {
       videoData = videoArray[i];
 
-      if (videoData.id == index) {
+      if (videoData.id === parseInt(index, 10)) {
         return videoData;
       }
     }
