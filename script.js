@@ -332,7 +332,7 @@ const library = (function () {
   }
 
   return {
-    init: init,
+    init,
   };
 })();
 
