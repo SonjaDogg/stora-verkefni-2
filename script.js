@@ -306,34 +306,34 @@ let library = (function () {
     // selects the correct sentence to show
     switch (true) {
       case (diffY !== 0 && diffY === 1):
-        return 'Fyrir ' + diffY + ' ári síðan';
+        return `Fyrir, ${diffY} ári síðan`;
         break;
       case (diffY !== 0 && diffY !== 1):
-        return 'Fyrir ' + diffY + ' árum síðan';
+        return `Fyrir ${diffY} árum síðan`;
         break;
       case (diffY === 0 && diffM === 1):
-        return 'Fyrir ' + diffM + ' mánuði síðan';
+        return `Fyrir  ${diffM} mánuði síðan`;
         break;
       case (diffY === 0 && diffM !== 1 && diffM > 1):
-        return 'Fyrir ' + diffM + ' mánuðum síðan';
+        return `Fyrir ${diffM} mánuðum síðan`;
         break;
       case (diffY === 0 && diffM === 0 && diffW === 1):
-        return 'Fyrir ' + diffW + ' viku síðan';
+        return `Fyrir ${diffW} viku síðan`;
         break;
       case (diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1):
-        return 'Fyrir ' + diffW + ' vikum síðan';
+        return `Fyrir ${diffW} vikum síðan`;
         break;
       case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1):
-        return 'Fyrir ' + diffD + ' degi síðan';
+        return `Fyrir ${diffD} degi síðan`;
         break;
       case (diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1):
-        return 'Fyrir ' + diffD + ' dögum síðan';
+        return `Fyrir ${diffD} dögum síðan`;
         break;
       case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1):
-        return 'Fyrir ' + diffH + ' klukkustund síðan';
+        return `Fyrir ${diffH} klukkustund síðan`;
         break;
       default:
-        return 'Fyrir ' + diffH + ' klukkustundum síðan';
+        return `Fyrir ${diffH} klukkustundum síðan`;
     }
   }
 
@@ -344,10 +344,10 @@ let library = (function () {
 
     // Adds a '0' in front of seconds if only 1 digit
     if (seconds.toString().length === 1) {
-      seconds = '0' + seconds;
+      seconds = `0${seconds}`;
     }
 
-    return minutes + ':' + seconds;
+    return `${minutes}:${seconds}`;
   }
 
   // clears elements already present in html

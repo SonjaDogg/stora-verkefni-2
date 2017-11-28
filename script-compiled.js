@@ -305,34 +305,34 @@ var library = function () {
     // selects the correct sentence to show
     switch (true) {
       case diffY !== 0 && diffY === 1:
-        return 'Fyrir ' + diffY + ' ári síðan';
+        return 'Fyrir, ' + diffY + ' \xE1ri s\xED\xF0an';
         break;
       case diffY !== 0 && diffY !== 1:
-        return 'Fyrir ' + diffY + ' árum síðan';
+        return 'Fyrir ' + diffY + ' \xE1rum s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 1:
-        return 'Fyrir ' + diffM + ' mánuði síðan';
+        return 'Fyrir  ' + diffM + ' m\xE1nu\xF0i s\xED\xF0an';
         break;
       case diffY === 0 && diffM !== 1 && diffM > 1:
-        return 'Fyrir ' + diffM + ' mánuðum síðan';
+        return 'Fyrir ' + diffM + ' m\xE1nu\xF0um s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 0 && diffW === 1:
-        return 'Fyrir ' + diffW + ' viku síðan';
+        return 'Fyrir ' + diffW + ' viku s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1:
-        return 'Fyrir ' + diffW + ' vikum síðan';
+        return 'Fyrir ' + diffW + ' vikum s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1:
-        return 'Fyrir ' + diffD + ' degi síðan';
+        return 'Fyrir ' + diffD + ' degi s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1:
-        return 'Fyrir ' + diffD + ' dögum síðan';
+        return 'Fyrir ' + diffD + ' d\xF6gum s\xED\xF0an';
         break;
       case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1:
-        return 'Fyrir ' + diffH + ' klukkustund síðan';
+        return 'Fyrir ' + diffH + ' klukkustund s\xED\xF0an';
         break;
       default:
-        return 'Fyrir ' + diffH + ' klukkustundum síðan';
+        return 'Fyrir ' + diffH + ' klukkustundum s\xED\xF0an';
     }
   }
 
