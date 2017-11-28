@@ -187,49 +187,33 @@ const library = (function () {
     return `${minutes}:${seconds}`;
   }
 
-  function showDate(movieDate) {
-    // calculates the difference of time between the creation of the video and
-    // the current time when the script is run
-    const diff = (Date.now() - movieDate) / 1000;
+  function showDate(movieTime) {
+    const d = new Date();
+    const n = d.getTime();
+    let timePassed = movieTime - 0;
 
-    const diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
-    const diffM = Math.floor((diff / (60 * 60 * 24 * 30)) % 12);
-    const diffW = Math.floor((diff / (60 * 60 * 24 * 7)) % 30);
-    const diffD = Math.floor((diff / (60 * 60 * 24)) % 7);
-    const diffH = Math.floor((diff / (60 * 60)) % 24);
+    // Computing difference between current date and created date
+    // and changing to years, months, weeks and days
+    const days = Math.floor((n - timePassed) / 1000 / 86400);
+    const weeks = Math.floor(days / 7);
+    const months = Math.floor(days / 52);
+    const years = Math.floor(days / 365.25);
 
-    // selects the correct sentence to show
-    switch (true) {
-      case (diffY !== 0 && diffY === 1):
-        return `Fyrir, ${diffY} ári síðan`;
-        break;
-      case (diffY !== 0 && diffY !== 1):
-        return `Fyrir ${diffY} árum síðan`;
-        break;
-      case (diffY === 0 && diffM === 1):
-        return `Fyrir  ${diffM} mánuði síðan`;
-        break;
-      case (diffY === 0 && diffM !== 1 && diffM > 1):
-        return `Fyrir ${diffM} mánuðum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 1):
-        return `Fyrir ${diffW} viku síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1):
-        return `Fyrir ${diffW} vikum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1):
-        return `Fyrir ${diffD} degi síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1):
-        return `Fyrir ${diffD} dögum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1):
-        return `Fyrir ${diffH} klukkustund síðan`;
-        break;
-      default:
-        return `Fyrir ${diffH} klukkustundum síðan`;
+    // Deciding what should be printed out below video
+    if (years >= 1) {
+      if (years === 1) timePassed = `Fyrir ${years} ári síðan`;
+      else timePassed = `Fyrir ${years} árum síðan`;
+    } else if (months >= 1) {
+      if (months === 1) timePassed = `Fyrir ${months} mánuði síðan`;
+      else timePassed = `Fyrir ${months} mánuðum síðan`;
+    } else if (weeks >= 1) {
+      if (weeks === 1) timePassed = `Fyrir ${weeks} viku síðan`;
+      else timePassed = `Fyrir ${weeks} vikum síðan`;
+    } else if (days >= 1) {
+      if (days === 1) timePassed = `Fyrir ${days} degi síðan`;
+      else timePassed = `Fyrir ${days} dögum síðan`;
     }
+    return timePassed;
   }
 
   function constructMovieDiv(dataForVideo) {

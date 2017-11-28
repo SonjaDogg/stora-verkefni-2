@@ -188,49 +188,29 @@ var library = function () {
     return minutes + ':' + seconds;
   }
 
-  function showDate(movieDate) {
-    // calculates the difference of time between the creation of the video and
-    // the current time when the script is run
-    var diff = (Date.now() - movieDate) / 1000;
+  function showDate(movieTime) {
+    var d = new Date();
+    var n = d.getTime();
+    var timePassed = movieTime - 0;
 
-    var diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
-    var diffM = Math.floor(diff / (60 * 60 * 24 * 30) % 12);
-    var diffW = Math.floor(diff / (60 * 60 * 24 * 7) % 30);
-    var diffD = Math.floor(diff / (60 * 60 * 24) % 7);
-    var diffH = Math.floor(diff / (60 * 60) % 24);
+    // Computing difference between current date and created date
+    // and changing to years, months, weeks and days
+    var days = Math.floor((n - timePassed) / 1000 / 86400);
+    var weeks = Math.floor(days / 7);
+    var months = Math.floor(days / 52);
+    var years = Math.floor(days / 365.25);
 
-    // selects the correct sentence to show
-    switch (true) {
-      case diffY !== 0 && diffY === 1:
-        return 'Fyrir, ' + diffY + ' \xE1ri s\xED\xF0an';
-        break;
-      case diffY !== 0 && diffY !== 1:
-        return 'Fyrir ' + diffY + ' \xE1rum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 1:
-        return 'Fyrir  ' + diffM + ' m\xE1nu\xF0i s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM !== 1 && diffM > 1:
-        return 'Fyrir ' + diffM + ' m\xE1nu\xF0um s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 1:
-        return 'Fyrir ' + diffW + ' viku s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1:
-        return 'Fyrir ' + diffW + ' vikum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1:
-        return 'Fyrir ' + diffD + ' degi s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1:
-        return 'Fyrir ' + diffD + ' d\xF6gum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1:
-        return 'Fyrir ' + diffH + ' klukkustund s\xED\xF0an';
-        break;
-      default:
-        return 'Fyrir ' + diffH + ' klukkustundum s\xED\xF0an';
+    // Deciding what should be printed out below video
+    if (years >= 1) {
+      if (years === 1) timePassed = 'Fyrir ' + years + ' \xE1ri s\xED\xF0an';else timePassed = 'Fyrir ' + years + ' \xE1rum s\xED\xF0an';
+    } else if (months >= 1) {
+      if (months === 1) timePassed = 'Fyrir ' + months + ' m\xE1nu\xF0i s\xED\xF0an';else timePassed = 'Fyrir ' + months + ' m\xE1nu\xF0um s\xED\xF0an';
+    } else if (weeks >= 1) {
+      if (weeks === 1) timePassed = 'Fyrir ' + weeks + ' viku s\xED\xF0an';else timePassed = 'Fyrir ' + weeks + ' vikum s\xED\xF0an';
+    } else if (days >= 1) {
+      if (days === 1) timePassed = 'Fyrir ' + days + ' degi s\xED\xF0an';else timePassed = 'Fyrir ' + days + ' d\xF6gum s\xED\xF0an';
     }
+    return timePassed;
   }
 
   function constructMovieDiv(dataForVideo) {
