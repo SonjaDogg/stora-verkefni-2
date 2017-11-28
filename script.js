@@ -242,6 +242,7 @@ let library = (function () {
         return videoData;
       }
     }
+    return 0;
   }
 
   function constructMovieDiv(dataForVideo) {
