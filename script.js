@@ -1,5 +1,5 @@
 
-const player = (function () {
+const player = (function () { // eslint-disable-line
   let videoContainer;
   let videoIndex;
 
@@ -125,7 +125,7 @@ const player = (function () {
     request.onload = function () {
       // converts the response to a json object to be able to use it
       const dataFromJsonVideos = JSON.parse(request.response);
-      const videos = dataFromJsonVideos.videos;
+      const { videos } = dataFromJsonVideos;
       const data = getVideoAtIndex(videoIndex, videos);
       constructVideoPlayer(data);
 
@@ -150,7 +150,7 @@ const player = (function () {
   };
 })();
 
-const library = (function () {
+const library = (function () { // eslint-disable-line
   let nylegm;
   let kennslum;
   let skemmtim;
@@ -268,7 +268,7 @@ const library = (function () {
   // Takes in data from json file and
   function displayData(data, htmlCategory, category) {
     const videosInCategory = category.videos;
-    const videos = data.videos;
+    const { videos } = data;
 
     // creates the header and gives it the title
     const header = document.createElement('h1');

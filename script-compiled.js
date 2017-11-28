@@ -1,6 +1,7 @@
 'use strict';
 
 var player = function () {
+  // eslint-disable-line
   var videoContainer = void 0;
   var videoIndex = void 0;
 
@@ -127,6 +128,7 @@ var player = function () {
       // converts the response to a json object to be able to use it
       var dataFromJsonVideos = JSON.parse(request.response);
       var videos = dataFromJsonVideos.videos;
+
       var data = getVideoAtIndex(videoIndex, videos);
       constructVideoPlayer(data);
 
@@ -152,6 +154,7 @@ var player = function () {
 }();
 
 var library = function () {
+  // eslint-disable-line
   var nylegm = void 0;
   var kennslum = void 0;
   var skemmtim = void 0;
@@ -268,6 +271,7 @@ var library = function () {
     var videos = data.videos;
 
     // creates the header and gives it the title
+
     var header = document.createElement('h1');
     header.appendChild(document.createTextNode(category.title));
 
