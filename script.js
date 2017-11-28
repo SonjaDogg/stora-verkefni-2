@@ -21,6 +21,12 @@ let player = (function () {
   let fullscreenHtml;
   let forwardHtml;
 
+  // clears elements already present in html
+  function empty(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
 
   function init() {
     const url = window.location.search;
@@ -32,6 +38,7 @@ let player = (function () {
     empty(videoContainer);
     fetchData();
   }
+
   // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
     let videoData;
@@ -105,12 +112,6 @@ let player = (function () {
     });
   }
 
-  function empty(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  }
-
   function constructVideoPlayer(videoData) {
     const spilandimHtml = document.createElement('div');
     const header = document.createElement('h1');
@@ -173,6 +174,13 @@ let library = (function () {
 
     // fetches data from json files and constructs the html
     fetchData();
+  }
+
+  // clears elements already present in html
+  function empty(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
   }
 
   function fetchData() {
@@ -348,13 +356,6 @@ let library = (function () {
     }
 
     return `${minutes}:${seconds}`;
-  }
-
-  // clears elements already present in html
-  function empty(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
   }
 
   return {

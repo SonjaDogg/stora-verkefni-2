@@ -23,6 +23,13 @@ var player = function () {
   var fullscreenHtml = void 0;
   var forwardHtml = void 0;
 
+  // clears elements already present in html
+  function empty(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
   function init() {
     var url = window.location.search;
     videoIndex = url.split('=')[1];
@@ -33,6 +40,7 @@ var player = function () {
     empty(videoContainer);
     fetchData();
   }
+
   // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
     var videoData = void 0;
@@ -106,12 +114,6 @@ var player = function () {
     });
   }
 
-  function empty(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  }
-
   function constructVideoPlayer(videoData) {
     var spilandimHtml = document.createElement('div');
     var header = document.createElement('h1');
@@ -174,6 +176,13 @@ var library = function () {
 
     // fetches data from json files and constructs the html
     fetchData();
+  }
+
+  // clears elements already present in html
+  function empty(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
   }
 
   function fetchData() {
@@ -348,13 +357,6 @@ var library = function () {
     }
 
     return minutes + ':' + seconds;
-  }
-
-  // clears elements already present in html
-  function empty(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
   }
 
   return {
