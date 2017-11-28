@@ -146,7 +146,7 @@ var player = function () {
     request.open('GET', 'videos.json', true);
 
     request.onload = function () {
-      // converts the response to a json object to be able to use it
+      // converts the response to a json object to be able to use it
       var dataFromJsonVideos = JSON.parse(request.response);
       var videos = dataFromJsonVideos.videos;
       var data = getVideoAtIndex(videoIndex, videos);
@@ -183,7 +183,7 @@ var library = function () {
 
     // runs a fuction to add the data to the html when request has retuned data
     request.onload = function () {
-      // converts the response to a json object to be able to use it
+      // converts the response to a json object to be able to use it
       var dataFromJsonVideos = JSON.parse(request.response);
 
       // creates a variable with data from the categories
