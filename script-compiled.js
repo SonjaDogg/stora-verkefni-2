@@ -18,17 +18,6 @@ var player = function () {
     }
   }
 
-  function init() {
-    var url = window.location.search;
-    videoIndex = url.split('=')[1];
-    videoContainer = document.querySelector('.video_container');
-
-    // Fetching video control elements
-
-    empty(videoContainer);
-    fetchData();
-  }
-
   // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
     var videoData = void 0;
@@ -146,6 +135,17 @@ var player = function () {
     request.send();
   }
 
+  function init() {
+    var url = window.location.search;
+    videoIndex = url.split('=')[1];
+    videoContainer = document.querySelector('.video_container');
+
+    // Fetching video control elements
+
+    empty(videoContainer);
+    fetchData();
+  }
+
   return {
     init: init
   };
@@ -155,16 +155,6 @@ var library = function () {
   var nylegm = void 0;
   var kennslum = void 0;
   var skemmtim = void 0;
-
-  function init() {
-    // searches the html document for html tags
-    nylegm = document.querySelector('.nylegm');
-    kennslum = document.querySelector('.kennslum');
-    skemmtim = document.querySelector('.skemmtim');
-
-    // fetches data from json files and constructs the html
-    fetchData();
-  }
 
   // clears elements already present in html
   function empty(element) {
@@ -346,6 +336,16 @@ var library = function () {
       // displayData(dataFromJsonVideos)
     };
     request.send();
+  }
+
+  function init() {
+    // searches the html document for html tags
+    nylegm = document.querySelector('.nylegm');
+    kennslum = document.querySelector('.kennslum');
+    skemmtim = document.querySelector('.skemmtim');
+
+    // fetches data from json files and constructs the html
+    fetchData();
   }
 
   return {
