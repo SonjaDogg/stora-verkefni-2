@@ -15,7 +15,6 @@ let player = (function () {
   let videoIndex;
 
   let video;
-  let overlayButtonHtml;
   let backHtml;
   let playHtml;
   let muteHtml;
@@ -53,8 +52,6 @@ let player = (function () {
     muteHtml = document.getElementsByClassName('mute');
     fullscreenHtml = document.getElementsByClassName('fullscreen');
     forwardHtml = document.getElementsByClassName('next');
-    overlayButtonHtml = document.getElementsByClassName('overlay');
-
 
     backHtml[0].addEventListener('click', function () {
       video.currentTime -= 3;
