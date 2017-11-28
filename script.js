@@ -146,7 +146,7 @@ const player = (function () {
   }
 
   return {
-    init: init,
+    init,
   };
 })();
 
