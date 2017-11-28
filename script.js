@@ -177,7 +177,7 @@ const library = (function () {
   function showTime(movieTime) {
     // Changes seconds to minutes and seconds
     const minutes = Math.floor(movieTime / 60);
-    let seconds = movieTime - Math.floor(movieTime / 60) * 60;
+    let seconds = movieTime - (Math.floor(movieTime / 60) * 60);
 
     // Adds a '0' in front of seconds if only 1 digit
     if (seconds.toString().length === 1) {
