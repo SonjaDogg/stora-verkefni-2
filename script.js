@@ -1,16 +1,5 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // runs when the DOM content has loaded
 
-  const playerHtml = document.querySelector('.spilandim');
-
-  if (playerHtml) {
-    player.init();
-  } else {
-    library.init();
-  }
-});
-
-let player = (function () {
+const player = (function () {
   let videoContainer;
   let videoIndex;
 
@@ -161,7 +150,7 @@ let player = (function () {
   };
 })();
 
-let library = (function () {
+const library = (function () {
   let nylegm;
   let kennslum;
   let skemmtim;
@@ -183,62 +172,6 @@ let library = (function () {
     }
   }
 
-  function fetchData() {
-    const request = new XMLHttpRequest();
-    request.open('GET', 'videos.json', true);
-
-    // runs a fuction to add the data to the html when request has retuned data
-    request.onload = function () {
-      // converts the response to a json object to be able to use it
-      const dataFromJsonVideos = JSON.parse(request.response);
-
-      // creates a variable with data from the categories
-      const ny = dataFromJsonVideos.categories[0];
-      empty(nylegm);
-      displayData(dataFromJsonVideos, nylegm, ny);
-
-      const kenns = dataFromJsonVideos.categories[1];
-      empty(kennslum);
-      displayData(dataFromJsonVideos, kennslum, kenns);
-
-      const skem = dataFromJsonVideos.categories[2];
-      empty(skemmtim);
-      displayData(dataFromJsonVideos, skemmtim, skem);
-
-
-      // displayData(dataFromJsonVideos)
-    };
-    request.send();
-  }
-
-  // Takes in data from json file and
-  function displayData(data, htmlCategory, category) {
-    const videosInCategory = category.videos;
-    const videos = data.videos;
-
-    // creates the header and gives it the title
-    const header = document.createElement('h1');
-    header.appendChild(document.createTextNode(category.title));
-
-    // creates showcase div element
-    const showcaseDiv = document.createElement('div');
-    showcaseDiv.classList.add('showcase');
-
-    // iterates through all videos in category
-    for (let i = 0; i < videosInCategory.length; i += 1) {
-      const videoIndex = videosInCategory[i];
-
-      // finds video data for the caregory at this index
-      const dataForCategory = getVideoAtIndex(videoIndex, videos);
-      // creates the movie div that goes into showcase div
-      const movieDiv = constructMovieDiv(dataForCategory);
-      // adds the movie div to html
-      showcaseDiv.appendChild(movieDiv);
-    }
-    // adding the card to the parent html (nylegm, skemmtim kennslum)
-    htmlCategory.appendChild(header);
-    htmlCategory.appendChild(showcaseDiv);
-  }
   // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
     for (let i = 0; i < videoArray.length; i += 1) {
@@ -249,6 +182,64 @@ let library = (function () {
       }
     }
     return 0;
+  }
+
+  function showTime(movieTime) {
+    // Changes seconds to minutes and seconds
+    const minutes = Math.floor(movieTime / 60);
+    let seconds = movieTime - Math.floor(movieTime / 60) * 60;
+
+    // Adds a '0' in front of seconds if only 1 digit
+    if (seconds.toString().length === 1) {
+      seconds = `0${seconds}`;
+    }
+
+    return `${minutes}:${seconds}`;
+  }
+
+  function showDate(movieDate) {
+    // calculates the difference of time between the creation of the video and
+    // the current time when the script is run
+    const diff = (Date.now() - movieDate) / 1000;
+
+    const diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
+    const diffM = Math.floor((diff / (60 * 60 * 24 * 30)) % 12);
+    const diffW = Math.floor((diff / (60 * 60 * 24 * 7)) % 30);
+    const diffD = Math.floor((diff / (60 * 60 * 24)) % 7);
+    const diffH = Math.floor((diff / (60 * 60)) % 24);
+
+    // selects the correct sentence to show
+    switch (true) {
+      case (diffY !== 0 && diffY === 1):
+        return `Fyrir, ${diffY} ári síðan`;
+        break;
+      case (diffY !== 0 && diffY !== 1):
+        return `Fyrir ${diffY} árum síðan`;
+        break;
+      case (diffY === 0 && diffM === 1):
+        return `Fyrir  ${diffM} mánuði síðan`;
+        break;
+      case (diffY === 0 && diffM !== 1 && diffM > 1):
+        return `Fyrir ${diffM} mánuðum síðan`;
+        break;
+      case (diffY === 0 && diffM === 0 && diffW === 1):
+        return `Fyrir ${diffW} viku síðan`;
+        break;
+      case (diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1):
+        return `Fyrir ${diffW} vikum síðan`;
+        break;
+      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1):
+        return `Fyrir ${diffD} degi síðan`;
+        break;
+      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1):
+        return `Fyrir ${diffD} dögum síðan`;
+        break;
+      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1):
+        return `Fyrir ${diffH} klukkustund síðan`;
+        break;
+      default:
+        return `Fyrir ${diffH} klukkustundum síðan`;
+    }
   }
 
   function constructMovieDiv(dataForVideo) {
@@ -300,65 +291,75 @@ let library = (function () {
     return movieDiv;
   }
 
-  function showDate(movieDate) {
-    // calculates the difference of time between the creation of the video and
-    // the current time when the script is run
-    const diff = (Date.now() - movieDate) / 1000;
+  // Takes in data from json file and
+  function displayData(data, htmlCategory, category) {
+    const videosInCategory = category.videos;
+    const videos = data.videos;
 
-    const diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
-    const diffM = Math.floor((diff / (60 * 60 * 24 * 30)) % 12);
-    const diffW = Math.floor((diff / (60 * 60 * 24 * 7)) % 30);
-    const diffD = Math.floor((diff / (60 * 60 * 24)) % 7);
-    const diffH = Math.floor((diff / (60 * 60)) % 24);
+    // creates the header and gives it the title
+    const header = document.createElement('h1');
+    header.appendChild(document.createTextNode(category.title));
 
-    // selects the correct sentence to show
-    switch (true) {
-      case (diffY !== 0 && diffY === 1):
-        return `Fyrir, ${diffY} ári síðan`;
-        break;
-      case (diffY !== 0 && diffY !== 1):
-        return `Fyrir ${diffY} árum síðan`;
-        break;
-      case (diffY === 0 && diffM === 1):
-        return `Fyrir  ${diffM} mánuði síðan`;
-        break;
-      case (diffY === 0 && diffM !== 1 && diffM > 1):
-        return `Fyrir ${diffM} mánuðum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 1):
-        return `Fyrir ${diffW} viku síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1):
-        return `Fyrir ${diffW} vikum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1):
-        return `Fyrir ${diffD} degi síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1):
-        return `Fyrir ${diffD} dögum síðan`;
-        break;
-      case (diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1):
-        return `Fyrir ${diffH} klukkustund síðan`;
-        break;
-      default:
-        return `Fyrir ${diffH} klukkustundum síðan`;
+    // creates showcase div element
+    const showcaseDiv = document.createElement('div');
+    showcaseDiv.classList.add('showcase');
+
+    // iterates through all videos in category
+    for (let i = 0; i < videosInCategory.length; i += 1) {
+      const videoIndex = videosInCategory[i];
+
+      // finds video data for the caregory at this index
+      const dataForCategory = getVideoAtIndex(videoIndex, videos);
+      // creates the movie div that goes into showcase div
+      const movieDiv = constructMovieDiv(dataForCategory);
+      // adds the movie div to html
+      showcaseDiv.appendChild(movieDiv);
     }
+    // adding the card to the parent html (nylegm, skemmtim kennslum)
+    htmlCategory.appendChild(header);
+    htmlCategory.appendChild(showcaseDiv);
   }
 
-  function showTime(movieTime) {
-    // Changes seconds to minutes and seconds
-    const minutes = Math.floor(movieTime / 60);
-    let seconds = movieTime - Math.floor(movieTime / 60) * 60;
+  function fetchData() {
+    const request = new XMLHttpRequest();
+    request.open('GET', 'videos.json', true);
 
-    // Adds a '0' in front of seconds if only 1 digit
-    if (seconds.toString().length === 1) {
-      seconds = `0${seconds}`;
-    }
+    // runs a fuction to add the data to the html when request has retuned data
+    request.onload = function () {
+      // converts the response to a json object to be able to use it
+      const dataFromJsonVideos = JSON.parse(request.response);
 
-    return `${minutes}:${seconds}`;
+      // creates a variable with data from the categories
+      const ny = dataFromJsonVideos.categories[0];
+      empty(nylegm);
+      displayData(dataFromJsonVideos, nylegm, ny);
+
+      const kenns = dataFromJsonVideos.categories[1];
+      empty(kennslum);
+      displayData(dataFromJsonVideos, kennslum, kenns);
+
+      const skem = dataFromJsonVideos.categories[2];
+      empty(skemmtim);
+      displayData(dataFromJsonVideos, skemmtim, skem);
+
+      // displayData(dataFromJsonVideos)
+    };
+    request.send();
   }
 
   return {
     init: init,
   };
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  // runs when the DOM content has loaded
+
+  const playerHtml = document.querySelector('.spilandim');
+
+  if (playerHtml) {
+    player.init();
+  } else {
+    library.init();
+  }
+});

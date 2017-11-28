@@ -1,17 +1,5 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function () {
-  // runs when the DOM content has loaded
-
-  var playerHtml = document.querySelector('.spilandim');
-
-  if (playerHtml) {
-    player.init();
-  } else {
-    library.init();
-  }
-});
-
 var player = function () {
   var videoContainer = void 0;
   var videoIndex = void 0;
@@ -185,61 +173,6 @@ var library = function () {
     }
   }
 
-  function fetchData() {
-    var request = new XMLHttpRequest();
-    request.open('GET', 'videos.json', true);
-
-    // runs a fuction to add the data to the html when request has retuned data
-    request.onload = function () {
-      // converts the response to a json object to be able to use it
-      var dataFromJsonVideos = JSON.parse(request.response);
-
-      // creates a variable with data from the categories
-      var ny = dataFromJsonVideos.categories[0];
-      empty(nylegm);
-      displayData(dataFromJsonVideos, nylegm, ny);
-
-      var kenns = dataFromJsonVideos.categories[1];
-      empty(kennslum);
-      displayData(dataFromJsonVideos, kennslum, kenns);
-
-      var skem = dataFromJsonVideos.categories[2];
-      empty(skemmtim);
-      displayData(dataFromJsonVideos, skemmtim, skem);
-
-      // displayData(dataFromJsonVideos)
-    };
-    request.send();
-  }
-
-  // Takes in data from json file and
-  function displayData(data, htmlCategory, category) {
-    var videosInCategory = category.videos;
-    var videos = data.videos;
-
-    // creates the header and gives it the title
-    var header = document.createElement('h1');
-    header.appendChild(document.createTextNode(category.title));
-
-    // creates showcase div element
-    var showcaseDiv = document.createElement('div');
-    showcaseDiv.classList.add('showcase');
-
-    // iterates through all videos in category
-    for (var i = 0; i < videosInCategory.length; i += 1) {
-      var videoIndex = videosInCategory[i];
-
-      // finds video data for the caregory at this index
-      var dataForCategory = getVideoAtIndex(videoIndex, videos);
-      // creates the movie div that goes into showcase div
-      var movieDiv = constructMovieDiv(dataForCategory);
-      // adds the movie div to html
-      showcaseDiv.appendChild(movieDiv);
-    }
-    // adding the card to the parent html (nylegm, skemmtim kennslum)
-    htmlCategory.appendChild(header);
-    htmlCategory.appendChild(showcaseDiv);
-  }
   // finds the video in json by index number
   function getVideoAtIndex(index, videoArray) {
     for (var i = 0; i < videoArray.length; i += 1) {
@@ -250,6 +183,64 @@ var library = function () {
       }
     }
     return 0;
+  }
+
+  function showTime(movieTime) {
+    // Changes seconds to minutes and seconds
+    var minutes = Math.floor(movieTime / 60);
+    var seconds = movieTime - Math.floor(movieTime / 60) * 60;
+
+    // Adds a '0' in front of seconds if only 1 digit
+    if (seconds.toString().length === 1) {
+      seconds = '0' + seconds;
+    }
+
+    return minutes + ':' + seconds;
+  }
+
+  function showDate(movieDate) {
+    // calculates the difference of time between the creation of the video and
+    // the current time when the script is run
+    var diff = (Date.now() - movieDate) / 1000;
+
+    var diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
+    var diffM = Math.floor(diff / (60 * 60 * 24 * 30) % 12);
+    var diffW = Math.floor(diff / (60 * 60 * 24 * 7) % 30);
+    var diffD = Math.floor(diff / (60 * 60 * 24) % 7);
+    var diffH = Math.floor(diff / (60 * 60) % 24);
+
+    // selects the correct sentence to show
+    switch (true) {
+      case diffY !== 0 && diffY === 1:
+        return 'Fyrir, ' + diffY + ' \xE1ri s\xED\xF0an';
+        break;
+      case diffY !== 0 && diffY !== 1:
+        return 'Fyrir ' + diffY + ' \xE1rum s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 1:
+        return 'Fyrir  ' + diffM + ' m\xE1nu\xF0i s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM !== 1 && diffM > 1:
+        return 'Fyrir ' + diffM + ' m\xE1nu\xF0um s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 0 && diffW === 1:
+        return 'Fyrir ' + diffW + ' viku s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1:
+        return 'Fyrir ' + diffW + ' vikum s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1:
+        return 'Fyrir ' + diffD + ' degi s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1:
+        return 'Fyrir ' + diffD + ' d\xF6gum s\xED\xF0an';
+        break;
+      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1:
+        return 'Fyrir ' + diffH + ' klukkustund s\xED\xF0an';
+        break;
+      default:
+        return 'Fyrir ' + diffH + ' klukkustundum s\xED\xF0an';
+    }
   }
 
   function constructMovieDiv(dataForVideo) {
@@ -301,67 +292,77 @@ var library = function () {
     return movieDiv;
   }
 
-  function showDate(movieDate) {
-    // calculates the difference of time between the creation of the video and
-    // the current time when the script is run
-    var diff = (Date.now() - movieDate) / 1000;
+  // Takes in data from json file and
+  function displayData(data, htmlCategory, category) {
+    var videosInCategory = category.videos;
+    var videos = data.videos;
 
-    var diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
-    var diffM = Math.floor(diff / (60 * 60 * 24 * 30) % 12);
-    var diffW = Math.floor(diff / (60 * 60 * 24 * 7) % 30);
-    var diffD = Math.floor(diff / (60 * 60 * 24) % 7);
-    var diffH = Math.floor(diff / (60 * 60) % 24);
+    // creates the header and gives it the title
+    var header = document.createElement('h1');
+    header.appendChild(document.createTextNode(category.title));
 
-    // selects the correct sentence to show
-    switch (true) {
-      case diffY !== 0 && diffY === 1:
-        return 'Fyrir, ' + diffY + ' \xE1ri s\xED\xF0an';
-        break;
-      case diffY !== 0 && diffY !== 1:
-        return 'Fyrir ' + diffY + ' \xE1rum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 1:
-        return 'Fyrir  ' + diffM + ' m\xE1nu\xF0i s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM !== 1 && diffM > 1:
-        return 'Fyrir ' + diffM + ' m\xE1nu\xF0um s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 1:
-        return 'Fyrir ' + diffW + ' viku s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW !== 1 && diffW > 1:
-        return 'Fyrir ' + diffW + ' vikum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 1:
-        return 'Fyrir ' + diffD + ' degi s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD !== 1 && diffD > 1:
-        return 'Fyrir ' + diffD + ' d\xF6gum s\xED\xF0an';
-        break;
-      case diffY === 0 && diffM === 0 && diffW === 0 && diffD === 0 && diffH === 1:
-        return 'Fyrir ' + diffH + ' klukkustund s\xED\xF0an';
-        break;
-      default:
-        return 'Fyrir ' + diffH + ' klukkustundum s\xED\xF0an';
+    // creates showcase div element
+    var showcaseDiv = document.createElement('div');
+    showcaseDiv.classList.add('showcase');
+
+    // iterates through all videos in category
+    for (var i = 0; i < videosInCategory.length; i += 1) {
+      var videoIndex = videosInCategory[i];
+
+      // finds video data for the caregory at this index
+      var dataForCategory = getVideoAtIndex(videoIndex, videos);
+      // creates the movie div that goes into showcase div
+      var movieDiv = constructMovieDiv(dataForCategory);
+      // adds the movie div to html
+      showcaseDiv.appendChild(movieDiv);
     }
+    // adding the card to the parent html (nylegm, skemmtim kennslum)
+    htmlCategory.appendChild(header);
+    htmlCategory.appendChild(showcaseDiv);
   }
 
-  function showTime(movieTime) {
-    // Changes seconds to minutes and seconds
-    var minutes = Math.floor(movieTime / 60);
-    var seconds = movieTime - Math.floor(movieTime / 60) * 60;
+  function fetchData() {
+    var request = new XMLHttpRequest();
+    request.open('GET', 'videos.json', true);
 
-    // Adds a '0' in front of seconds if only 1 digit
-    if (seconds.toString().length === 1) {
-      seconds = '0' + seconds;
-    }
+    // runs a fuction to add the data to the html when request has retuned data
+    request.onload = function () {
+      // converts the response to a json object to be able to use it
+      var dataFromJsonVideos = JSON.parse(request.response);
 
-    return minutes + ':' + seconds;
+      // creates a variable with data from the categories
+      var ny = dataFromJsonVideos.categories[0];
+      empty(nylegm);
+      displayData(dataFromJsonVideos, nylegm, ny);
+
+      var kenns = dataFromJsonVideos.categories[1];
+      empty(kennslum);
+      displayData(dataFromJsonVideos, kennslum, kenns);
+
+      var skem = dataFromJsonVideos.categories[2];
+      empty(skemmtim);
+      displayData(dataFromJsonVideos, skemmtim, skem);
+
+      // displayData(dataFromJsonVideos)
+    };
+    request.send();
   }
 
   return {
     init: init
   };
 }();
+
+document.addEventListener('DOMContentLoaded', function () {
+  // runs when the DOM content has loaded
+
+  var playerHtml = document.querySelector('.spilandim');
+
+  if (playerHtml) {
+    player.init();
+  } else {
+    library.init();
+  }
+});
 
 //# sourceMappingURL=script-compiled.js.map
