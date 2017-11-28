@@ -248,8 +248,10 @@ var library = function () {
     var movieDiv = document.createElement('div');
     movieDiv.classList.add('movie');
 
+    var videoHtml = 'videos.html';
+    var idForVid = '?id=';
     var clickableContainer = document.createElement('a');
-    clickableContainer.setAttribute('href', 'videos.html' + '?id=' + dataForVideo.id);
+    clickableContainer.setAttribute('href', videoHtml + idForVid + dataForVideo.id);
     var movieImgDiv = document.createElement('div');
     movieImgDiv.classList.add('movie__image');
 
