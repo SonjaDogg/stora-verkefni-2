@@ -43,6 +43,7 @@ let player = (function () {
         return videoData;
       }
     }
+    return 0;
   }
 
   function bindControls() {
