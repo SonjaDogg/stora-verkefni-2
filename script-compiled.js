@@ -291,9 +291,8 @@ var library = function () {
   }
 
   function showDate(movieDate) {
-    /** calculates the difference of time between the creation of the video and
-          the current time when the script is run
-    **/
+    // calculates the difference of time between the creation of the video and
+    // the current time when the script is run
     var diff = (Date.now() - movieDate) / 1000;
 
     var diffY = Math.floor(diff / (60 * 60 * 24 * 30 * 12));
