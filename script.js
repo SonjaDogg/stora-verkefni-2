@@ -136,7 +136,7 @@ const player = (function () { // eslint-disable-line
 
   function init() {
     const url = window.location.search;
-    videoIndex = url.split('=')[1];
+    videoIndex = url.split('=')[1]; // eslint-disable-line
     videoContainer = document.querySelector('.video_container');
 
     // Fetching video control elements
