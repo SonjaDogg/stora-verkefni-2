@@ -39,13 +39,13 @@ const player = (function () {
     fullscreenHtml = document.getElementsByClassName('fullscreen');
     forwardHtml = document.getElementsByClassName('next');
 
-    backHtml[0].addEventListener('click', function () {
+    backHtml[0].addEventListener('click', () => {
       video.currentTime -= 3;
     });
 
     // play and pause controls
 
-    playHtml[0].addEventListener('click', function () {
+    playHtml[0].addEventListener('click', () => {
       if (video.paused) {
         video.play();
         document.getElementById('play_pause').setAttribute('src', 'img/pause.svg');
@@ -61,7 +61,7 @@ const player = (function () {
 
     // mute control
 
-    muteHtml[0].addEventListener('click', function () {
+    muteHtml[0].addEventListener('click', () => {
       if (video.muted) {
         video.muted = false;
         document.getElementById('mute_unmute').setAttribute('src', 'img/mute.svg');
@@ -73,7 +73,7 @@ const player = (function () {
 
     // fullscreen control
 
-    fullscreenHtml[0].addEventListener('click', function () {
+    fullscreenHtml[0].addEventListener('click', () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();
       } else if (video.mozRequestFullScreen) {
@@ -85,7 +85,7 @@ const player = (function () {
 
     // forward control
 
-    forwardHtml[0].addEventListener('click', function () {
+    forwardHtml[0].addEventListener('click', () => {
       video.currentTime += 3;
     });
   }
@@ -336,7 +336,7 @@ const library = (function () {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
   // runs when the DOM content has loaded
 
   const playerHtml = document.querySelector('.spilandim');
