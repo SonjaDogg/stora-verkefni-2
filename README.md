@@ -1,4 +1,5 @@
 STÓRT VERKEFNI 2
+
 GENERAL INFORMATION
 
 The exercise consists on a web with two pages and with the principles of responsive web design in mind. To view the exercise it is only necessary to open in browser the file index.html that is contained in the folder of the project: stort-verkefni-2.
